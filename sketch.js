@@ -1,12 +1,11 @@
 let photos = [];
-let index = 0;
 let canvas;
 let menuHeight = 0;
 let started = false;
-let totalImages = 11;
+const totalImages = 10; // agora são 10 imagens
 
 function preload() {
-  // Carrega todas as imagens de forma síncrona
+  // Carrega todas as 10 imagens de forma síncrona
   for (let i = 1; i <= totalImages; i++) {
     let img = loadImage(`images/${i}.png`);
     photos.push(img);
@@ -41,16 +40,19 @@ function mousePressed() {
     return;
   }
 
-  index++;
-  if (index >= photos.length) index = 0;
+  // Sorteia uma imagem aleatória entre as 10
+  let randIndex = floor(random(photos.length));
+  currentImage = photos[randIndex];
 }
+
+let currentImage = null;
 
 function draw() {
   background('#f2f2f2');
 
   // TEXTO INICIAL
   if (!started) {
-    fill(0, 128); // 50% de opacidade
+    fill(0, 128); // 50% opacidade
     noStroke();
     text(
       "Haz clic, arrastra, juega.\nClick, drag, play.\nClique, arraste, jogue.",
@@ -60,13 +62,10 @@ function draw() {
     return;
   }
 
-  // DESENHO DAS IMAGENS
-  if (mouseIsPressed) {
-    let img = photos[index];
-    if (!img) return;
-
+  // DESENHO DAS IMAGENS enquanto o mouse está pressionado
+  if (mouseIsPressed && currentImage) {
     let w = 450;
     let h = w * (2 / 3);
-    image(img, mouseX - w / 2, mouseY - h / 2, w, h);
+    image(currentImage, mouseX - w / 2, mouseY - h / 2, w, h);
   }
 }
