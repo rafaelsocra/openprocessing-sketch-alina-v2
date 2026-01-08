@@ -3,65 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>OpenProcessing Sketch Alina</title>
+
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden; /* remove scroll */
-        background-color: #f2f2f2; /* cor gelo */
-    }
-    canvas {
-        display: block;
-    }
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f2f2f2;
+  }
+  canvas {
+    display: block;
+  }
 </style>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+<script src="sketch.js"></script>
 </head>
+
 <body>
-<script>
-let photos = [];
-let index = -1;
-
-function preload() {
-    // carregar imagens da pasta 'images' no mesmo repositório
-    for (let i = 1; i <= 7; i++) {
-        photos.push(loadImage(`images/${i}.png`));
-    }
-}
-
-function setup() {
-    noCursor();
-    createCanvas(windowWidth, windowHeight);
-    frameRate(30);
-    background('#f2f2f2');
-}
-
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-}
-
-function keyPressed() {
-    if (keyCode === 8) { // Delete
-        clear();
-        background('#f2f2f2');
-    }
-    if (keyCode === 80) { // P
-        saveCanvas('myCanvas', 'png');
-    }
-}
-
-function mousePressed() {
-    index = (index + 1) % photos.length;
-    background('#f2f2f2');
-}
-
-function draw() {
-    if (mouseIsPressed) {
-        let img = photos[index];
-        let w = img.width / 4;
-        let h = img.height / 4;
-        image(img, mouseX - w / 2, mouseY - h / 2, w, h);
-    }
-}
-</script>
 </body>
 </html>
