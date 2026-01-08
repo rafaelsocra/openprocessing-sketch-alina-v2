@@ -22,22 +22,22 @@ function windowResized() {
 }
 
 function mousePressed() {
+  // no primeiro clique: remove texto e já sorteia imagem
   if (!started) {
     started = true;
-    background('#f2f2f2'); // limpa só uma vez
-    return;
   }
 
-  // sorteia nova imagem a cada clique
+  // sorteia imagem a cada clique (inclusive o primeiro)
   let r = floor(random(photos.length));
   currentImage = photos[r];
 }
 
 function draw() {
-  // TEXTO INICIAL (canvas limpo)
+  // TEXTO INICIAL
   if (!started) {
     background('#f2f2f2');
     fill(0, 128); // 50% opacidade
+    noStroke();
     text(
       "Haz clic, arrastra, juega.\nClick, drag, play.\nClique, arraste, jogue.",
       width / 2,
@@ -46,7 +46,7 @@ function draw() {
     return;
   }
 
-  // MULTIPLICAÇÃO AO ARRASTAR (SEM LIMPAR O FUNDO)
+  // MULTIPLICAÇÃO AO ARRASTAR (sem limpar o fundo)
   if (mouseIsPressed && currentImage) {
     let w = currentImage.width / 4;
     let h = currentImage.height / 4;
