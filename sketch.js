@@ -19,25 +19,24 @@ function setup() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  background('#f2f2f2');
 }
 
 function mousePressed() {
   if (!started) {
     started = true;
+    background('#f2f2f2'); // limpa só uma vez
     return;
   }
 
-  // sorteia uma imagem a cada clique
+  // sorteia nova imagem a cada clique
   let r = floor(random(photos.length));
   currentImage = photos[r];
 }
 
 function draw() {
-  background('#f2f2f2');
-
-  // TEXTO INICIAL
+  // TEXTO INICIAL (canvas limpo)
   if (!started) {
+    background('#f2f2f2');
     fill(0, 128); // 50% opacidade
     text(
       "Haz clic, arrastra, juega.\nClick, drag, play.\nClique, arraste, jogue.",
@@ -47,10 +46,10 @@ function draw() {
     return;
   }
 
-  // DESENHO
+  // MULTIPLICAÇÃO AO ARRASTAR (SEM LIMPAR O FUNDO)
   if (mouseIsPressed && currentImage) {
-    let w = 450;
-    let h = w * (2 / 3);
+    let w = currentImage.width / 4;
+    let h = currentImage.height / 4;
     image(currentImage, mouseX - w / 2, mouseY - h / 2, w, h);
   }
 }
