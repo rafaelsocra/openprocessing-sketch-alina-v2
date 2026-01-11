@@ -36,7 +36,7 @@ function draw() {
   // TEXTO INICIAL
   if (!started) {
     background('#f2f2f2');
-    fill(0, 128); // 30% opacidade
+    fill(0, 128); // 15% opacidade
     noStroke();
     text(
       "click touch drag press move feel play rythm",
